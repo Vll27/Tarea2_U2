@@ -1,0 +1,51 @@
+<div style="text-align: center;">
+  <form novalidate [formGroup]="user">
+    <div class="form-group">
+      <label>
+        <span>Edad</span>
+        <input
+          class="form-control"
+          type="number"
+          placeholder="Edad del usuario"
+          formControlName="edad"
+        />
+      </label>
+      <div
+        class="error"
+        style="color: red;"
+        *ngIf="
+          (user.get('edad')?.hasError('required') && user.get('edad')?.touched) ||
+          (user.get('edad')?.hasError('min') && user.get('edad')?.touched) ||
+          (user.get('edad')?.hasError('max') && user.get('edad')?.touched)">
+        Edad invalida
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <span>Sitio Web</span>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Ingrese el Sitio Web"
+          formControlName="sitioweb"
+        />
+      </label>
+      <div
+        class="error"
+        style="color: red;"
+        *ngIf="
+          user.get('sitioweb')?.hasError('required') && user.get('sitioweb')?.touched">
+        Sitio web requerido
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="user.invalid" class="btn btn-success">
+        Registrar Perfil
+      </button>
+    </div>
+  </form>
+  <p>Form value: {{ user.value | json }}</p>
+  <p>Form status: {{ user.status | json }}</p>
+</div>
